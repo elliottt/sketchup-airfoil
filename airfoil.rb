@@ -1,4 +1,5 @@
 require 'sketchup'
+require 'extensions'
 
 extension = SketchupExtension.new("Airfoil Importer", "airfoil/importer.rb")
 extension.description = "Importer for the UIUC Airfoil format"
