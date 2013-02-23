@@ -27,21 +27,16 @@ module Airfoil
       model = Sketchup.active_model
       model.start_operation("Import Airfoil", true)
 
-      group = model.active_entities.add_group
-
       File.open(path) { |handle|
         handle.each_line { |line|
           if /^\s+-?[0-9]/ =~ line
             vert = line.split
             verts.push [ vert[0].to_f, 0, vert[1].to_f ]
-          elsif /^[^\s]/ =~ line
-            group.name = line
           end
         }
       }
 
-      curve = group.entities.add_curve(verts)
-      group.entities.add_face(curve)
+      model.entities.add_curve(verts)
       model.commit_operation
 
       0
